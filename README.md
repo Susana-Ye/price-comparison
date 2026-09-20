@@ -271,12 +271,12 @@ Python is responsible for:
 - [x] Create receipt table
 - [x] Create product alias system
 - [x] Create review workflow
-- [ ] Define structured AI output
+- [x] Define structured AI output
 - [x] Connect to Gemini API
 - [x] Define modular project structure
 - [ ] Extract structured data from receipt images
-- [ ] Read known products automatically from Excel
-- [ ] Read known aliases automatically from Excel
+- [x] Read known products automatically from Excel
+- [x] Read known aliases automatically from Excel
 - [ ] Match receipt products against the catalogue
 - [ ] Generate review items for uncertain matches
 - [ ] Automatically update Excel

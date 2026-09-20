@@ -4,7 +4,7 @@ client = genai.Client()
 
 interaction = client.interactions.create(
     model="gemini-3.8-flash",
-    input="Say hello in Spanish."
+    input="Explain how AI works in a few words"
 )
 
 print(interaction.output_text)

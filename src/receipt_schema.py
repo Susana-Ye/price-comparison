@@ -170,12 +170,3 @@ class ReceiptExtraction(BaseModel):
     unassigned_discounts: list[UnassignedDiscount]
 
     warnings: list[str]
-    schema_version: str
-
-    ticket: TicketInfo
-
-    products: list[ProductLine]
-
-    unassigned_discounts: list[UnassignedDiscount]
-
-    warnings: list[str]

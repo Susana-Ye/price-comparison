@@ -271,7 +271,7 @@ Python is responsible for:
 - [x] Create receipt table
 - [x] Create product alias system
 - [x] Create review workflow
-- [x] Define structured AI output
+- [ ] Define structured AI output
 - [x] Connect to Gemini API
 - [x] Define modular project structure
 - [ ] Extract structured data from receipt images

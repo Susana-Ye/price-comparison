@@ -161,6 +161,116 @@ python test_gemini.py
 
 If the API is configured correctly, Gemini should return a response.
 
+## Mock Receipt Mode
+
+During development, the project can run without making requests to the Gemini API.
+
+This is useful for testing the rest of the pipeline without consuming API quota or depending on external API availability.
+
+The mock mode uses a predefined JSON file that follows the same `ReceiptExtraction` schema expected from Gemini.
+
+### How It Works
+
+The project supports two execution modes:
+
+```text
+USE_GEMINI = True
+        ↓
+Gemini API
+        ↓
+ReceiptExtraction
+
+USE_GEMINI = False
+        ↓
+data/mock_receipt.json
+        ↓
+Pydantic validation
+        ↓
+ReceiptExtraction
+```
+
+Both modes produce the same validated `ReceiptExtraction` object, so the rest of the pipeline can run without changes.
+
+### Configuration
+
+The execution mode is controlled in:
+
+```text
+src/config.py
+```
+
+To use the real Gemini API:
+
+```python
+USE_GEMINI = True
+```
+
+To use the mock receipt:
+
+```python
+USE_GEMINI = False
+```
+
+The mock receipt path is also defined in `config.py`:
+
+```python
+MOCK_RECEIPT_JSON_PATH = BASE_DIR / "data" / "mock_receipt.json"
+```
+
+### Mock Receipt File
+
+The mock receipt is stored in:
+
+```text
+data/mock_receipt.json
+```
+
+This file represents a simulated Gemini response and must follow the structure defined in:
+
+```text
+src/receipt_schema.py
+```
+
+Before being used by the pipeline, the JSON is validated with Pydantic:
+
+```python
+ReceiptExtraction.model_validate(data)
+```
+
+This ensures that development tests use the same data structure and validation rules as real Gemini responses.
+
+### When to Use Mock Mode
+
+Mock mode is recommended when working on parts of the application that do not require new AI extraction, such as:
+
+* product matching
+* price calculations
+* unit conversions
+* receipt ID generation
+* price history creation
+* review workflows
+* Excel writing
+* price comparison logic
+* pipeline integration tests
+
+This avoids unnecessary Gemini API calls during development.
+
+### Switching Back to Gemini
+
+When receipt extraction itself needs to be tested, change:
+
+```python
+USE_GEMINI = False
+```
+
+to:
+
+```python
+USE_GEMINI = True
+```
+
+The pipeline will then analyze the receipt image using the Gemini API instead of loading the local mock file.
+
 ## Data Model
 
 The Excel file stored locally in `data/price_comparison_structure.xlsx` contains the main structured datasets used by the application.
@@ -274,7 +384,7 @@ Python is responsible for:
 - [x] Define structured AI output
 - [x] Connect to Gemini API
 - [x] Define modular project structure
-- [ ] Extract structured data from receipt images
+- [x] Extract structured data from receipt images
 - [x] Read known products automatically from Excel
 - [x] Read known aliases automatically from Excel
 - [ ] Match receipt products against the catalogue

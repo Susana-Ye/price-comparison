@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "ticket": {
+    "store_name": "ALDI",
+    "store_branch": null,
+    "date": "2026-09-20",
+    "currency": "EUR",
+    "gross_total": 5.47,
+    "discount_total": 0.5,
+    "total_paid": 4.97,
+    "payment_method": "card"
+  },
+  "products": [
+    {
+      "line_index": 1,
+      "receipt_name": "OAT DRINK",
+      "product_id": "P0001",
+      "quantity_original": "1 L",
+      "quantity_value": 1.0,
+      "quantity_unit": "L",
+      "gross_price": 1.49,
+      "discount_amount": null,
+      "printed_unit_price": 1.49,
+      "printed_unit": "L",
+      "match_method": "semantic_match",
+      "confidence": 0.96,
+      "status": "ok",
+      "review_reason": null,
+      "new_product_details": null
+    },
+    {
+      "line_index": 2,
+      "receipt_name": "AVOCADO",
+      "product_id": null,
+      "quantity_original": "2",
+      "quantity_value": 2.0,
+      "quantity_unit": "unit",
+      "gross_price": 3.98,
+      "discount_amount": 0.5,
+      "printed_unit_price": 1.99,
+      "printed_unit": "unit",
+      "match_method": "new_product",
+      "confidence": 0.91,
+      "status": "new_product",
+      "review_reason": null,
+      "new_product_details": {
+        "normalized_name": "Avocado",
+        "brand": null,
+        "category": "Food",
+        "subcategory": "Fruit",
+        "comparison_unit": "unit"
+      }
+    }
+  ],
+  "unassigned_discounts": [],
+  "warnings": []
+}

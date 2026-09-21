@@ -9,9 +9,9 @@ __pycache__/
 .env
 
 # Personal receipt data
-receipts/
-output/
-data/
+data/price_comparison_structure.xlsx
+receipts/ticket.jpg
+output/ticket.json
 
 # IDE
 .idea/

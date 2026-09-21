@@ -274,9 +274,9 @@ The pipeline will then analyze the receipt image using the Gemini API instead of
 
 ## Data Model
 
-The Excel file stored locally in `data/price_comparison_structure.xlsx` contains the main structured datasets used by the application.
+The Excel file stored locally in `data/price_comparison_structure.xlsx` contains the main structured datasets used by the application. (Not included in repository for privacy issues).
 
-The current workbook is standardized in English.
+The workbook is standardized in English.
 
 ### Products
 
@@ -350,6 +350,60 @@ IJSBERGSLA   → P0076 → Iceberg lettuce
 Stores products, discounts, or fields that the AI cannot identify confidently.
 
 The system prefers human review instead of guessing uncertain information.
+
+### Test data
+
+This repository includes a small synthetic dataset that can be used to run and test the project without requiring the private dataset used during development.
+
+The test workbook is located at:
+
+```text
+data/price_comparison_test_data.xlsx
+```
+
+All products, brands, stores, aliases, and other values contained in this file are fictional and are provided only for development and testing purposes.
+
+The private development workbook is intentionally excluded from the repository:
+
+```text
+data/price_comparison_structure.xlsx
+```
+
+It is listed in `.gitignore` and should never be committed to the repository.
+
+#### Running with test data
+
+By default, the application expects the private development workbook.
+
+To use the public synthetic dataset instead, set the `USE_TEST_DATA` environment variable.
+
+On Windows PowerShell:
+
+```powershell
+$env:USE_TEST_DATA="true"
+python main.py
+```
+
+To return to the default configuration:
+
+```powershell
+Remove-Item Env:USE_TEST_DATA
+```
+
+When `USE_TEST_DATA=true`, the project uses:
+
+```text
+data/price_comparison_test_data.xlsx
+```
+
+instead of:
+
+```text
+data/price_comparison_structure.xlsx
+```
+
+This makes it possible to clone and test the repository without exposing any personal or private data.
+
 
 ## AI Design Principles
 

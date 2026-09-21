@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ticket": {
-    "store_name": "ALDI",
+    "store_name": "DemoMart",
     "store_branch": null,
     "date": "2026-09-20",
     "currency": "EUR",

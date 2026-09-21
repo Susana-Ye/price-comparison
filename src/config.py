@@ -1,8 +1,14 @@
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-EXCEL_PATH = BASE_DIR / "data" / "price_comparison_structure.xlsx"
+USE_TEST_DATA = os.getenv("USE_TEST_DATA", "false").lower() == "true"
+# This environment variable allows to switch between test data and production data without changing the code.
+if USE_TEST_DATA:
+    EXCEL_PATH = BASE_DIR / "data" / "price_comparison_test_data.xlsx"
+else:
+    EXCEL_PATH = BASE_DIR / "data" / "price_comparison_structure.xlsx"
 
 RECEIPT_PATH = BASE_DIR / "receipts" / "ticket.jpg"
 

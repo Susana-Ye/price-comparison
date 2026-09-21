@@ -61,6 +61,7 @@ price-comparison/
 │   └── pipeline.py
 │
 ├── data/
+│   ├── mock_receipt.json
 │   └── price_comparison_structure.xlsx
 │
 ├── receipts/                              

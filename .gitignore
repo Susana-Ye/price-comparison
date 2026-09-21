@@ -11,7 +11,7 @@ __pycache__/
 # Personal receipt data
 receipts/
 output/
-# data/
+data/
 
 # IDE
 .idea/

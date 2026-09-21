@@ -62,7 +62,8 @@ price-comparison/
 │
 ├── data/
 │   ├── mock_receipt.json
-│   └── price_comparison_structure.xlsx
+│   ├── price_comparison_test_data.xlsx
+│   └── price_comparison_structure.xlsx     # Not uploaded in repository
 │
 ├── receipts/                              
 │

@@ -4,6 +4,8 @@ from pathlib import Path
 from src.excel_reader import load_aliases, load_products
 from src.gemini_service import analyse_receipt
 from src.receipt_schema import ReceiptExtraction
+from src.config import USE_GEMINI, MOCK_RECEIPT_JSON_PATH
+from src.mock_service import load_mock_receipt
 
 
 def save_receipt_result(
@@ -24,7 +26,7 @@ def save_receipt_result(
             file,
             ensure_ascii=False,
             indent=2,
-        ) # Save the Pydantic model given by Gemini as JSON
+        ) # Save the Pydantic model given by Gemini as JSON in output_path
 
 
 def run_pipeline(
@@ -59,14 +61,21 @@ def run_pipeline(
     print(f"Loaded {len(aliases)} aliases.")
 
 
-    print("Step 3/4 - Analysing receipt with Gemini...")
+    if USE_GEMINI:
+        print("Step 3/4 - Analysing receipt with Gemini...")
 
-    result = analyse_receipt(
-        receipt_path=receipt_path,
-        products=products,
-        aliases=aliases,
-    )
-    
+        result = analyse_receipt(
+            receipt_path,
+            products,
+            aliases,
+        )
+    else:
+        print("Step 3/4 - Loading mock receipt...")
+
+        result = load_mock_receipt(
+            MOCK_RECEIPT_JSON_PATH
+        )
+
     print("Gemini response validated successfully.")
 
 

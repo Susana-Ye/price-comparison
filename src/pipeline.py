@@ -69,6 +69,9 @@ def run_pipeline(
             products,
             aliases,
         )
+
+        print("Gemini response validated successfully.")
+        
     else:
         print("Step 3/4 - Loading mock receipt...")
 
@@ -76,7 +79,7 @@ def run_pipeline(
             MOCK_RECEIPT_JSON_PATH
         )
 
-    print("Gemini response validated successfully.")
+        print("Mock receipt loaded successfully.")
 
 
     print("Step 4/4 - Saving validated JSON...")

@@ -170,9 +170,9 @@ def load_aliases(excel_path: str | Path,) -> list[dict[str, Any]]:
                 continue
 
             alias = {
-                "receipt_text": receipt_text,
-                "product_id": row[header_map["Product ID"] - 1],
-                "store": row[header_map["Store"] - 1],
+                "receipt_text": str(receipt_text).strip(),
+                "product_id": str(row[header_map["Product ID"] - 1]).strip(),
+                "store": str(row[header_map["Store"] - 1]).strip(),
             }
 
             aliases.append(alias)
@@ -181,3 +181,123 @@ def load_aliases(excel_path: str | Path,) -> list[dict[str, Any]]:
 
     finally:
         workbook.close()
+
+
+def build_product_index(
+    products: list[dict[str, Any]],
+) -> dict[str, dict[str, Any]]:
+    """
+    Build a product lookup dictionary keyed by Product ID.
+    Converts: 
+    [
+        {
+            "product_id": "P0001",
+            "normalized_name": "Oat milk Haverdrink",
+        }
+    ]
+    Into:  
+    {
+        "P0001": {
+            "product_id": "P0001",
+            "normalized_name": "Oat milk Haverdrink",
+        }
+    }
+    """
+
+    product_index = {}
+
+    for product in products:
+        product_id = product.get("product_id")
+
+        if not product_id:
+            continue
+
+        if product_id in product_index:
+            raise ValueError(f"Duplicate Product ID found: {product_id}")
+
+        product_index[product_id] = product
+
+    return product_index
+
+
+def find_product_by_id(
+    product_index: dict[str, dict[str, Any]],
+    product_id: str | None,
+) -> dict[str, Any] | None:
+    """
+    Find a product in the product index by Product ID.
+    """
+
+    if product_id is None: # Returns None when it's a new_product or unresolved 
+        return None
+
+    return product_index.get(product_id)
+
+
+def build_alias_index(
+    aliases: list[dict[str, Any]],
+) -> dict[tuple[str, str], str]:
+    """
+    Build an alias lookup dictionary, from alias find the corresponding Product ID.
+
+    The key is:
+        (normalized receipt text, normalized store)
+
+    The value is:
+        product_id
+    """
+
+    alias_index = {}
+
+    for alias in aliases:
+        receipt_text = alias.get("receipt_text")
+        product_id = alias.get("product_id")
+        store = alias.get("store")
+
+        if (not receipt_text or not product_id):
+            continue
+
+        normalized_receipt_text = str(receipt_text).strip().casefold() # .casefold() is used for case-insensitive comparison, more robust than lower().
+
+        normalized_store = (
+            str(store).strip().casefold()
+            if store is not None
+            else ""
+        ) # Consider store name since some aliases may be store-specific. If store is None, we treat it as a generic alias.
+
+        key = (normalized_receipt_text, normalized_store)
+
+        if (key in alias_index and alias_index[key] != product_id):
+            raise ValueError(
+                "Conflicting alias mapping found for "
+                f"receipt text '{receipt_text}' "
+                f"and store '{store}'."
+            ) # Raises an error if the same alias maps to different Product IDs.
+
+        alias_index[key] = product_id
+
+    return alias_index
+
+
+def find_alias_match(
+    alias_index: dict[tuple[str, str], str],
+    receipt_text: str,
+    store: str | None,
+) -> str | None:
+    """
+    Find a Product ID using receipt text and store.
+
+    First tries an exact store-specific alias.
+    Then tries a store-independent alias.
+    """
+
+    normalized_receipt_text = receipt_text.strip().casefold()
+    normalized_store = store.strip().casefold() if store else ""
+
+    store_specific_key = (normalized_receipt_text, normalized_store)
+
+    if store_specific_key in alias_index:
+        return alias_index[store_specific_key]
+
+    generic_key = (normalized_receipt_text, "")
+    return alias_index.get(generic_key)

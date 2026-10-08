@@ -443,11 +443,11 @@ Python is responsible for:
 - [x] Extract structured data from receipt images
 - [x] Read known products automatically from Excel
 - [x] Read known aliases automatically from Excel
-- [ ] Match receipt products against the catalogue
-- [ ] Generate review items for uncertain matches
+- [x] Match receipt products against the catalogue
+- [x] Generate review items for uncertain matches
 - [ ] Automatically update Excel
-- [ ] Add normalized price calculations
-- [ ] Add price comparison logic
+- [x] Add normalized price calculations
+- [x] Add price comparison logic
 - [ ] Add dashboard and charts
 - [ ] Build a Streamlit interface
 - [ ] Migrate from Excel to a database

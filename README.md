@@ -431,6 +431,7 @@ Python is responsible for:
 
 ## Roadmap
 
+V1:
 - [x] Define Excel data structure
 - [x] Create product catalogue
 - [x] Create price history
@@ -444,10 +445,20 @@ Python is responsible for:
 - [x] Read known products automatically from Excel
 - [x] Read known aliases automatically from Excel
 - [x] Match receipt products against the catalogue
+V2:
 - [x] Generate review items for uncertain matches
-- [x] Automatically update Excel
 - [x] Add normalized price calculations
 - [x] Add price comparison logic
+- [x] Automatically write processed results to Excel
+V3:
+- [ ] Process reviewed items
+- [ ] Approve and create new products
+- [ ] Automatically create new product aliases
+- [ ] Add reviewed products to price history
+- [ ] Add duplicate receipt protection
+- [ ] Safely update the main Excel workbook
+- [ ] Add automated tests
+V4:
 - [ ] Add dashboard and charts
 - [ ] Build a Streamlit interface
 - [ ] Migrate from Excel to a database

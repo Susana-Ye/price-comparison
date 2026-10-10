@@ -16,6 +16,8 @@ OUTPUT_DIR = BASE_DIR / "output"
 
 OUTPUT_JSON_PATH = OUTPUT_DIR / "ticket.json"
 
+OUTPUT_EXCEL_PATH = OUTPUT_DIR / "price_comparison_updated.xlsx"
+
 GEMINI_MODEL = "gemini-3.8-flash"
 
 # Special configuration for testing and development purposes. 

@@ -445,7 +445,7 @@ Python is responsible for:
 - [x] Read known aliases automatically from Excel
 - [x] Match receipt products against the catalogue
 - [x] Generate review items for uncertain matches
-- [ ] Automatically update Excel
+- [x] Automatically update Excel
 - [x] Add normalized price calculations
 - [x] Add price comparison logic
 - [ ] Add dashboard and charts

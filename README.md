@@ -445,11 +445,13 @@ V1:
 - [x] Read known products automatically from Excel
 - [x] Read known aliases automatically from Excel
 - [x] Match receipt products against the catalogue
+
 V2:
 - [x] Generate review items for uncertain matches
 - [x] Add normalized price calculations
 - [x] Add price comparison logic
 - [x] Automatically write processed results to Excel
+
 V3:
 - [ ] Process reviewed items
 - [ ] Approve and create new products
@@ -458,6 +460,7 @@ V3:
 - [ ] Add duplicate receipt protection
 - [ ] Safely update the main Excel workbook
 - [ ] Add automated tests
+
 V4:
 - [ ] Add dashboard and charts
 - [ ] Build a Streamlit interface
